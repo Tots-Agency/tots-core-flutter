@@ -1,3 +1,7 @@
+## 0.0.7
+
+* Add tots query. Add tots list response.
+
 ## 0.0.6
 
 * Change names in http service.

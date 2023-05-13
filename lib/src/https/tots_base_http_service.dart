@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:tots_core/src/entities/tots_base_entity.dart';
 import 'package:tots_core/src/https/tots_http.dart';
+import 'package:tots_core/tots_core.dart';
 
 class TotsBaseHttpService<T extends TotsBaseEntity> {
 
@@ -56,6 +57,20 @@ class TotsBaseHttpService<T extends TotsBaseEntity> {
 
       if (response.statusCode != 200) {
         throw Exception('Error update 1');
+      }
+
+      return response.data!;
+    } on DioError catch (e) {
+      throw Exception(e.message);
+    }
+  }
+
+  Future<Map<String, dynamic>> listBase(TotsQuery query) async {
+    try {
+      final response = await TotsHttp.instance.get(basePath, queryParameters: query.toJson());
+
+      if (response.statusCode != 200) {
+        throw Exception('Error list 1');
       }
 
       return response.data!;
