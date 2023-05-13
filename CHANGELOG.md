@@ -1,3 +1,18 @@
+## 0.0.6
+
+* Change names in http service.
+
+## 0.0.5
+
+* Add empty constructor
+
+## 0.0.4
+
+* Fix generic http service.
+
+## 0.0.3
+
+* Fix export.
 ## 0.0.2
 
 * Add base http service.

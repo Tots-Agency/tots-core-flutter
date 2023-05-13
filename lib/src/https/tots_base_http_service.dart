@@ -8,9 +8,9 @@ class TotsBaseHttpService<T extends TotsBaseEntity> {
 
   TotsBaseHttpService(this.basePath);
 
-  Future<T> create(T item) async {
+  Future<Map<String, dynamic>> createBase(T item) async {
     try {
-      final response = await TotsHttp.instance.post<T>(basePath, data: item.toJson());
+      final response = await TotsHttp.instance.post(basePath, data: item.toJson());
 
       if (response.statusCode != 200) {
         throw Exception('Error create 1');
@@ -22,9 +22,9 @@ class TotsBaseHttpService<T extends TotsBaseEntity> {
     }
   }
 
-  Future<T> fetchById(int id) async {
+  Future<Map<String, dynamic>> fetchByIdBase(int id) async {
     try {
-      final response = await TotsHttp.instance.get<T>('$basePath/$id');
+      final response = await TotsHttp.instance.get('$basePath/$id');
 
       if (response.statusCode != 200) {
         throw Exception('Error fetchById 1');
@@ -36,9 +36,9 @@ class TotsBaseHttpService<T extends TotsBaseEntity> {
     }
   }
 
-  Future<dynamic> delete(int id) async {
+  Future<Map<String, dynamic>> delete(int id) async {
     try {
-      final response = await TotsHttp.instance.delete<dynamic>('$basePath/$id');
+      final response = await TotsHttp.instance.delete('$basePath/$id');
 
       if (response.statusCode != 200) {
         throw Exception('Error delete 1');
@@ -50,9 +50,9 @@ class TotsBaseHttpService<T extends TotsBaseEntity> {
     }
   }
 
-  Future<T> update(T item) async {
+  Future<Map<String, dynamic>> updateBase(T item) async {
     try {
-      final response = await TotsHttp.instance.put<T>('$basePath/${item.id}', data: item.toJson());
+      final response = await TotsHttp.instance.put('$basePath/${item.id}', data: item.toJson());
 
       if (response.statusCode != 200) {
         throw Exception('Error update 1');
