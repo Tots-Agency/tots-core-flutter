@@ -1,3 +1,7 @@
+## 0.0.8
+
+* Fix response.
+
 ## 0.0.7
 
 * Add tots query. Add tots list response.

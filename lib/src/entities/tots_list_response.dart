@@ -12,7 +12,7 @@ class TotsListResponse<T> {
   int total = 0;
   List<T> data = List.empty(growable: true);
 
-  void fromJson(Map<String, dynamic> json, List<T> dataList) {
+  TotsListResponse<T> fromJson(Map<String, dynamic> json, List<T> dataList) {
     currentPage = json['current_page'] is int ? json['current_page'] : int.parse(json['current_page']);
     firstPageUrl = json['first_page_url'];
     from = json['from'];
@@ -26,5 +26,7 @@ class TotsListResponse<T> {
     total = json['total'] is int ? json['total'] : int.parse(json['total']);
 
     data = dataList;
+
+    return this;
   }
 }
