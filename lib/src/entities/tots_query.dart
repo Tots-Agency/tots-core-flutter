@@ -99,7 +99,7 @@ class TotsQuery {
   }
 
   String convertWheresToBase64() {
-    return base64Encode(utf8.encode(jsonEncode({ wheres: wheres, orders: orders })));
+    return base64Encode(utf8.encode(jsonEncode({ 'wheres': wheres, 'orders': orders })));
   }
 
   @override

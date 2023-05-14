@@ -4,10 +4,10 @@ class TotsListResponse<T> {
   int from = 0;
   int lastPage = 0;
   String lastPageUrl = '';
-  String nextPageUrl = '';
+  String? nextPageUrl = '';
   String path = '';
   int perPage = 0;
-  String prevPageUrl = '';
+  String? prevPageUrl = '';
   int to = 0;
   int total = 0;
   List<T> data = List.empty(growable: true);

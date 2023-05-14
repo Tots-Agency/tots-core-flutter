@@ -1,3 +1,11 @@
+## 0.0.10
+
+* Fix response.
+
+## 0.0.9
+
+* Fix convert to base64.
+
 ## 0.0.8
 
 * Fix response.
