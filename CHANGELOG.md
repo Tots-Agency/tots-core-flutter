@@ -1,3 +1,7 @@
+## 0.0.11
+
+* Add methods for easy error handling.
+
 ## 0.0.10
 
 * Fix response.
