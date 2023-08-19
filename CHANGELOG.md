@@ -1,3 +1,11 @@
+## 0.0.14
+
+* Add List type responses.
+
+## 0.0.13
+
+* Add type Response.
+
 ## 0.0.12
 
 * Change ParseHttpCallback to dynamic.

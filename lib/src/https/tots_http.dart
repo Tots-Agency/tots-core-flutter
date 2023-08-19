@@ -2,7 +2,8 @@ import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:tots_core/src/https/tots_http_exception.dart';
 
-typedef ParseHttpCallback = dynamic Function(dynamic);
+typedef ParseHttpCallback = dynamic Function(Map<String, dynamic>);
+typedef ParseListHttpCallback = dynamic Function(List<Map<String, dynamic>>);
 
 class TotsHttp {
   static final _dio = Dio();
@@ -28,6 +29,10 @@ class TotsHttp {
     return request<T>('PUT', path, data, callback);
   }
 
+  static Future<T> patch<T>(String path, Map<String, dynamic> data, ParseHttpCallback callback) async {
+    return request<T>('PATCH', path, data, callback);
+  }
+
   static Future<T> getWithQuery<T>(String path, Map<String, dynamic>? queryParameters, ParseHttpCallback callback) async {
     return request<T>('GET', path, queryParameters, callback);
   }
@@ -42,20 +47,47 @@ class TotsHttp {
 
   static Future<T> request<T>(String method, String path, Map<String, dynamic>? data, ParseHttpCallback callback) async {
     try {
-      dynamic response;
-      if(method == 'POST'){
-        response = await TotsHttp.instance.post(path, data: data);
-      } else if(method == 'GET'){
-        response = await TotsHttp.instance.get(path, queryParameters: data);
-      } else if(method == 'PUT'){
-        response = await TotsHttp.instance.put(path, data: data);
-      } else if(method == 'DELETE'){
-        response = await TotsHttp.instance.delete(path);
-      } else {
-        throw Exception('Method not allowed');
-      }
+      Response<Map<String, dynamic>> response = await TotsHttp.instance.request(path, data: data, options: Options(method: method));
       if(response.statusCode == 200){
-        return callback(response.data);
+        return callback.call(response.data!);
+      }
+      throw Exception('Error undefined');
+    } on DioException catch (e) {
+      throw TotsHttpException.fromDioException(e);
+    } on Exception catch (e) {
+      throw Exception(e.toString());
+    }
+  }
+
+  static Future<T> postList<T>(String path, Map<String, dynamic> data, ParseListHttpCallback callback) async {
+    return requestList<T>('POST', path, data, callback);
+  }
+
+  static Future<T> putList<T>(String path, Map<String, dynamic> data, ParseListHttpCallback callback) async {
+    return requestList<T>('PUT', path, data, callback);
+  }
+
+  static Future<T> patchList<T>(String path, Map<String, dynamic> data, ParseListHttpCallback callback) async {
+    return requestList<T>('PATCH', path, data, callback);
+  }
+
+  static Future<T> getWithQueryList<T>(String path, Map<String, dynamic>? queryParameters, ParseListHttpCallback callback) async {
+    return requestList<T>('GET', path, queryParameters, callback);
+  }
+
+  static Future<T> getList<T>(String path, ParseListHttpCallback callback) async {
+    return requestList<T>('GET', path, null, callback);
+  }
+
+  static Future<T> deleteList<T>(String path, ParseListHttpCallback callback) async {
+    return requestList<T>('DELETE', path, null, callback);
+  }
+
+  static Future<T> requestList<T>(String method, String path, Map<String, dynamic>? data, ParseListHttpCallback callback) async {
+    try {
+      Response<List<Map<String, dynamic>>> response = await TotsHttp.instance.request(path, data: data, options: Options(method: method));
+      if(response.statusCode == 200){
+        return callback.call(response.data!);
       }
       throw Exception('Error undefined');
     } on DioException catch (e) {
