@@ -1,3 +1,7 @@
+## 0.0.12
+
+* Change ParseHttpCallback to dynamic.
+
 ## 0.0.11
 
 * Add methods for easy error handling.

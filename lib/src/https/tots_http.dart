@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:tots_core/src/https/tots_http_exception.dart';
 
-typedef ParseHttpCallback = dynamic Function(Map<String, dynamic>);
+typedef ParseHttpCallback = dynamic Function(dynamic);
 
 class TotsHttp {
   static final _dio = Dio();
