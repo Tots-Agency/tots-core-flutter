@@ -1,3 +1,7 @@
+## 0.0.15
+
+* Fix query params in TotsHttp.
+
 ## 0.0.14
 
 * Add List type responses.

@@ -22,32 +22,32 @@ class TotsHttp {
   static Dio get instance => _dio;
 
   static Future<T> post<T>(String path, Map<String, dynamic> data, ParseHttpCallback callback) async {
-    return request<T>('POST', path, data, callback);
+    return request<T>('POST', path, data, null, callback);
   }
 
   static Future<T> put<T>(String path, Map<String, dynamic> data, ParseHttpCallback callback) async {
-    return request<T>('PUT', path, data, callback);
+    return request<T>('PUT', path, data, null, callback);
   }
 
   static Future<T> patch<T>(String path, Map<String, dynamic> data, ParseHttpCallback callback) async {
-    return request<T>('PATCH', path, data, callback);
+    return request<T>('PATCH', path, data, null, callback);
   }
 
   static Future<T> getWithQuery<T>(String path, Map<String, dynamic>? queryParameters, ParseHttpCallback callback) async {
-    return request<T>('GET', path, queryParameters, callback);
+    return request<T>('GET', path, null, queryParameters, callback);
   }
 
   static Future<T> get<T>(String path, ParseHttpCallback callback) async {
-    return request<T>('GET', path, null, callback);
+    return request<T>('GET', path, null, null, callback);
   }
 
   static Future<T> delete<T>(String path, ParseHttpCallback callback) async {
-    return request<T>('DELETE', path, null, callback);
+    return request<T>('DELETE', path, null, null, callback);
   }
 
-  static Future<T> request<T>(String method, String path, Map<String, dynamic>? data, ParseHttpCallback callback) async {
+  static Future<T> request<T>(String method, String path, Map<String, dynamic>? data, Map<String, dynamic>? queryParameters, ParseHttpCallback callback) async {
     try {
-      Response<Map<String, dynamic>> response = await TotsHttp.instance.request(path, data: data, options: Options(method: method));
+      Response<Map<String, dynamic>> response = await TotsHttp.instance.request(path, data: data, queryParameters: queryParameters, options: Options(method: method));
       if(response.statusCode == 200){
         return callback.call(response.data!);
       }
@@ -60,32 +60,32 @@ class TotsHttp {
   }
 
   static Future<T> postList<T>(String path, Map<String, dynamic> data, ParseListHttpCallback callback) async {
-    return requestList<T>('POST', path, data, callback);
+    return requestList<T>('POST', path, data, null, callback);
   }
 
   static Future<T> putList<T>(String path, Map<String, dynamic> data, ParseListHttpCallback callback) async {
-    return requestList<T>('PUT', path, data, callback);
+    return requestList<T>('PUT', path, data, null, callback);
   }
 
   static Future<T> patchList<T>(String path, Map<String, dynamic> data, ParseListHttpCallback callback) async {
-    return requestList<T>('PATCH', path, data, callback);
+    return requestList<T>('PATCH', path, data, null, callback);
   }
 
   static Future<T> getWithQueryList<T>(String path, Map<String, dynamic>? queryParameters, ParseListHttpCallback callback) async {
-    return requestList<T>('GET', path, queryParameters, callback);
+    return requestList<T>('GET', path, null, queryParameters, callback);
   }
 
   static Future<T> getList<T>(String path, ParseListHttpCallback callback) async {
-    return requestList<T>('GET', path, null, callback);
+    return requestList<T>('GET', path, null, null, callback);
   }
 
   static Future<T> deleteList<T>(String path, ParseListHttpCallback callback) async {
-    return requestList<T>('DELETE', path, null, callback);
+    return requestList<T>('DELETE', path, null, null, callback);
   }
 
-  static Future<T> requestList<T>(String method, String path, Map<String, dynamic>? data, ParseListHttpCallback callback) async {
+  static Future<T> requestList<T>(String method, String path, Map<String, dynamic>? data, Map<String, dynamic>? queryParameters, ParseListHttpCallback callback) async {
     try {
-      Response<List<Map<String, dynamic>>> response = await TotsHttp.instance.request(path, data: data, options: Options(method: method));
+      Response<List<Map<String, dynamic>>> response = await TotsHttp.instance.request(path, data: data, queryParameters: queryParameters, options: Options(method: method));
       if(response.statusCode == 200){
         return callback.call(response.data!);
       }
