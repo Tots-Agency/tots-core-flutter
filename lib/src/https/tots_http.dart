@@ -3,7 +3,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:tots_core/src/https/tots_http_exception.dart';
 
 typedef ParseHttpCallback = dynamic Function(Map<String, dynamic>);
-typedef ParseListHttpCallback = dynamic Function(List<Map<String, dynamic>>);
+typedef ParseListHttpCallback = dynamic Function(List<dynamic>);
 
 class TotsHttp {
   static final _dio = Dio();
@@ -85,7 +85,7 @@ class TotsHttp {
 
   static Future<T> requestList<T>(String method, String path, Map<String, dynamic>? data, Map<String, dynamic>? queryParameters, ParseListHttpCallback callback) async {
     try {
-      Response<List<Map<String, dynamic>>> response = await TotsHttp.instance.request(path, data: data, queryParameters: queryParameters, options: Options(method: method));
+      Response<List<dynamic>> response = await TotsHttp.instance.request(path, data: data, queryParameters: queryParameters, options: Options(method: method));
       if(response.statusCode == 200){
         return callback.call(response.data!);
       }

@@ -1,3 +1,7 @@
+## 0.0.16
+
+* Change to List<dynamic>
+
 ## 0.0.15
 
 * Fix query params in TotsHttp.
