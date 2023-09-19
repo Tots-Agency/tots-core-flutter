@@ -6,3 +6,4 @@ export 'src/entities/tots_list_response.dart';
 export 'src/https/tots_http_exception.dart';
 export 'src/https/tots_http.dart';
 export 'src/https/tots_base_http_service.dart';
+export 'src/helpers/tots_global_event.dart';

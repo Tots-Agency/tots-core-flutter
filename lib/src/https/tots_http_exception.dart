@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:tots_core/src/helpers/tots_global_event.dart';
 
 class TotsHttpException implements Exception {
   final String? message;
@@ -12,6 +13,11 @@ class TotsHttpException implements Exception {
   }
 
   static TotsHttpException fromDioException(DioException e) {
+    if(e.response != null && e.response?.statusCode == 401){
+      TotsGlobalEvent().emit('unauthorized');
+      return TotsHttpException('Unauthorized', 401);
+    }
+
     if(e.response == null || e.response?.data == null){
       return TotsHttpException(e.message, -1);
     }
