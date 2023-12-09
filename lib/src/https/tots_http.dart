@@ -48,7 +48,7 @@ class TotsHttp {
   static Future<T> request<T>(String method, String path, Map<String, dynamic>? data, Map<String, dynamic>? queryParameters, ParseHttpCallback callback) async {
     try {
       Response<Map<String, dynamic>> response = await TotsHttp.instance.request(path, data: data, queryParameters: queryParameters, options: Options(method: method));
-      if(response.statusCode == 200){
+      if(response.statusCode! >= 200 && response.statusCode! <= 299){
         return callback.call(response.data!);
       }
       throw Exception('Error undefined');
