@@ -22,32 +22,56 @@ class TotsHttp {
   static Dio get instance => _dio;
 
   static Future<T> post<T>(String path, Map<String, dynamic> data, ParseHttpCallback callback) async {
-    return request<T>('POST', path, data, null, callback);
+    return request<T>('POST', path, data, null, callback, null);
+  }
+
+  static Future<T> postByCancel<T>(String path, Map<String, dynamic> data, ParseHttpCallback callback, CancelToken? cancelToken) async {
+    return request<T>('POST', path, data, null, callback, cancelToken);
   }
 
   static Future<T> put<T>(String path, Map<String, dynamic> data, ParseHttpCallback callback) async {
-    return request<T>('PUT', path, data, null, callback);
+    return request<T>('PUT', path, data, null, callback, null);
+  }
+
+  static Future<T> putByCancel<T>(String path, Map<String, dynamic> data, ParseHttpCallback callback, CancelToken? cancelToken) async {
+    return request<T>('PUT', path, data, null, callback, cancelToken);
   }
 
   static Future<T> patch<T>(String path, Map<String, dynamic> data, ParseHttpCallback callback) async {
-    return request<T>('PATCH', path, data, null, callback);
+    return request<T>('PATCH', path, data, null, callback, null);
+  }
+
+  static Future<T> patchByCancel<T>(String path, Map<String, dynamic> data, ParseHttpCallback callback, CancelToken? cancelToken) async {
+    return request<T>('PATCH', path, data, null, callback, cancelToken);
   }
 
   static Future<T> getWithQuery<T>(String path, Map<String, dynamic>? queryParameters, ParseHttpCallback callback) async {
-    return request<T>('GET', path, null, queryParameters, callback);
+    return request<T>('GET', path, null, queryParameters, callback, null);
+  }
+
+  static Future<T> getWithQueryByCancel<T>(String path, Map<String, dynamic>? queryParameters, ParseHttpCallback callback, CancelToken? cancelToken) async {
+    return request<T>('GET', path, null, queryParameters, callback, cancelToken);
   }
 
   static Future<T> get<T>(String path, ParseHttpCallback callback) async {
-    return request<T>('GET', path, null, null, callback);
+    return request<T>('GET', path, null, null, callback, null);
+  }
+
+  static Future<T> getByCancel<T>(String path, ParseHttpCallback callback, CancelToken? cancelToken) async {
+    return request<T>('GET', path, null, null, callback, cancelToken);
   }
 
   static Future<T> delete<T>(String path, ParseHttpCallback callback) async {
-    return request<T>('DELETE', path, null, null, callback);
+    return request<T>('DELETE', path, null, null, callback, null);
   }
 
-  static Future<T> request<T>(String method, String path, Map<String, dynamic>? data, Map<String, dynamic>? queryParameters, ParseHttpCallback callback) async {
+  static Future<T> deleteByCancel<T>(String path, ParseHttpCallback callback, CancelToken? cancelToken) async {
+    return request<T>('DELETE', path, null, null, callback, cancelToken);
+  }
+
+  static Future<T> request<T>(String method, String path, Map<String, dynamic>? data, Map<String, dynamic>? queryParameters, ParseHttpCallback callback, CancelToken? cancelToken) async {
     try {
-      Response<Map<String, dynamic>> response = await TotsHttp.instance.request(path, data: data, queryParameters: queryParameters, options: Options(method: method));
+      Response<Map<String, dynamic>> response = await TotsHttp.instance.request(path, data: data, queryParameters: queryParameters, options: Options(method: method), cancelToken: cancelToken);
       if(response.statusCode! >= 200 && response.statusCode! <= 299){
         return callback.call(response.data!);
       }
