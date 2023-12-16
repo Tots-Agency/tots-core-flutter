@@ -1,3 +1,7 @@
+## 0.0.23
+
+* Parse message field in dio exception.
+
 ## 0.0.22
 
 * Add cancel token in tots http.

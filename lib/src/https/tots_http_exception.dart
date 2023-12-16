@@ -29,6 +29,8 @@ class TotsHttpException implements Exception {
     Map<String, dynamic> json = e.response?.data as Map<String, dynamic>;
     if(json['error'] != null && json['error']['message'] != null){
       return TotsHttpException(json['error']['message'], json['error']['code']);
+    } else if (json['message'] != null) {
+      return TotsHttpException(json['message'], -1);
     }
 
     return TotsHttpException(e.message, -1);
