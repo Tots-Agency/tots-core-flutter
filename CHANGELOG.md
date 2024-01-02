@@ -1,3 +1,7 @@
+## 0.0.24
+
+* Add Accept and Content-Type for Json.
+
 ## 0.0.23
 
 * Parse message field in dio exception.

@@ -71,7 +71,10 @@ class TotsHttp {
 
   static Future<T> request<T>(String method, String path, Map<String, dynamic>? data, Map<String, dynamic>? queryParameters, ParseHttpCallback callback, CancelToken? cancelToken) async {
     try {
-      Response<Map<String, dynamic>> response = await TotsHttp.instance.request(path, data: data, queryParameters: queryParameters, options: Options(method: method), cancelToken: cancelToken);
+      Response<Map<String, dynamic>> response = await TotsHttp.instance.request(path, data: data, queryParameters: queryParameters, options: Options(method: method, headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }), cancelToken: cancelToken);
       if(response.statusCode! >= 200 && response.statusCode! <= 299){
         return callback.call(response.data!);
       }
@@ -109,7 +112,10 @@ class TotsHttp {
 
   static Future<T> requestList<T>(String method, String path, Map<String, dynamic>? data, Map<String, dynamic>? queryParameters, ParseListHttpCallback callback) async {
     try {
-      Response<List<dynamic>> response = await TotsHttp.instance.request(path, data: data, queryParameters: queryParameters, options: Options(method: method));
+      Response<List<dynamic>> response = await TotsHttp.instance.request(path, data: data, queryParameters: queryParameters, options: Options(method: method, headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }));
       if(response.statusCode == 200){
         return callback.call(response.data!);
       }
