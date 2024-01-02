@@ -9,7 +9,7 @@ class TotsHttpException implements Exception {
 
   @override
   String toString() {
-    return 'TotsHttpException{message: $message, statusCode: $statusCode}';
+    return '$message';
   }
 
   static TotsHttpException fromDioException(DioException e) {
