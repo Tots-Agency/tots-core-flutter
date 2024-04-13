@@ -1,3 +1,7 @@
+## 0.0.26
+
+* Add Tots Cloud Storage HTTP Service.
+
 ## 0.0.25
 
 * Add TotsFile class
