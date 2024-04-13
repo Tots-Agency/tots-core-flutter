@@ -1,3 +1,7 @@
+## 0.0.25
+
+* Add TotsFile class
+
 ## 0.0.24
 
 * Add Accept and Content-Type for Json.
