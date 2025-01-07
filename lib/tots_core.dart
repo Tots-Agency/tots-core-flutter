@@ -8,5 +8,9 @@ export 'src/https/tots_http_exception.dart';
 export 'src/https/tots_http.dart';
 export 'src/https/tots_base_http_service.dart';
 export 'src/https/tots_cloud_storage_http.dart';
+
 export 'src/helpers/tots_global_event.dart';
+export 'src/helpers/tots_json_helper.dart';
+export 'src/helpers/tots_string_helper.dart';
+
 export 'src/providers/change_notifier_with_loading.dart';
